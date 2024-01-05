@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: ;
+    color: #333333;
+    font-size: 16px;
+    padding: 20px;
+}
+
+p {
+    font-size: .9em;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+a {
+    color: #333333;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Italiana', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-align: center;
+}
