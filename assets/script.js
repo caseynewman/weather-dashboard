@@ -1,7 +1,9 @@
 const searchBtn = document.querySelector('#search-button');
 const cityInput = document.querySelector('#city-search');
 const currentWeatherDiv = document.querySelector('#current-weather');
+const citiesContainer = document.querySelector('#cities-container');
 const currentDate = dayjs().format('dddd, MMMM D, YYYY');
+let cities = JSON.parse(localStorage.getItem('cities')) || [];
 let cityName;
 let currentTemp;
 let currentWind;
@@ -20,7 +22,8 @@ const getWeather = async (url) => {
     currentHumidity = cityData.main.humidity;
     console.log(cityData)
 
-    displayCurrentWeather()
+    displayCurrentWeather();
+    updateRecentSearch();
 }
 
 const displayCurrentWeather = () => {
@@ -45,10 +48,29 @@ const displayCurrentWeather = () => {
     currentWeatherDiv.appendChild(currentHumidityDisplay);
 }
 
-// const updateRecentSearch = () => {
-//     currentCity = 
-// }
+const updateRecentSearch = () => {
+    cities.push(cityName);
+    localStorage.setItem('cities', JSON.stringify(cities));
+    displayRecentSearch();
+}
 
+const displayRecentSearch = () => {
+    const citiesList = document.createElement('ul');
+    cities.forEach((cities, index) => {
+        const newCity = document.createElement('li');
+        newCity.textContent = cityName;
+        citiesList.appendChild(newCity);
+    })
+    citiesContainer.appendChild(citiesList);
+}
+
+const displayRecentSearchHeading = () => {
+    const recentSearchHeading = document.createElement('h4');
+    recentSearchHeading.textContent = 'Recent Searches';
+    citiesContainer.appendChild(recentSearchHeading);
+}
+
+displayRecentSearchHeading();
 
 
 
