@@ -11,6 +11,7 @@ let currentHumidity;
 
 
 
+
 const getWeather = async (url) => {
     let currentCity = cityInput.value;
 
@@ -23,10 +24,17 @@ const getWeather = async (url) => {
     currentHumidity = cityData.main.humidity;
     console.log(cityData)
 
-
     displayCurrentWeather();
-    // updateRecentSearch();
+    updateRecentSearch();
 }
+
+const displayRecentSearchHeading = () => {
+    const recentSearchHeading = document.createElement('h4');
+    recentSearchHeading.textContent = 'Your Recent Cities';
+    citiesContainer.appendChild(recentSearchHeading);
+}
+
+displayRecentSearchHeading();
 
 const displayCurrentWeather = () => {
     const currentCityDisplay = document.createElement('h2');
@@ -50,21 +58,9 @@ const displayCurrentWeather = () => {
     currentWeatherDiv.appendChild(currentHumidityDisplay);
 }
 
-// const updateRecentSearch = () => {
-//     localStorage.setItem('cities', JSON.stringify(cities));
-// }
-
-const displayRecentSearch = () => {
+const updateRecentSearch = () => {
+    cities.push(cityName)
     localStorage.setItem('cities', JSON.stringify(cities));
-    const citiesList = document.createElement('li');
-    cities.forEach((cities, index) => {
-        const newCity = document.createElement('button');
-        newCity.textContent = cityName;
-        citiesList.appendChild(newCity);
-    })
-    citiesContainer.appendChild(citiesList);
-    console.log(removeDuplicateCities(cities));
-
 }
 
 const removeDuplicateCities = (data) => {
@@ -77,14 +73,36 @@ const removeDuplicateCities = (data) => {
     return uniqueCities;
 }
 
-const displayRecentSearchHeading = () => {
-    const recentSearchHeading = document.createElement('h4');
-    recentSearchHeading.textContent = 'Your Recent Cities';
-    citiesContainer.appendChild(recentSearchHeading);
+
+const displayRecentSearch = () => {
+    localStorage.setItem('cities', JSON.stringify(cities));
+    const citiesList = document.createElement('li');
+    cities.forEach((cities, index) => {
+        const newCity = document.createElement('button');
+        newCity.textContent = cities;
+        citiesList.appendChild(newCity);
+    })
+    citiesContainer.appendChild(citiesList);
+    removeDuplicateCities(cities);
+
 }
 
-displayRecentSearchHeading();
 displayRecentSearch();
+
+
+
+
+console.log(removeDuplicateCities(cities))
+
+
+
+
+
+
+
+
+
+
 
 
 
