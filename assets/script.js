@@ -3,6 +3,9 @@ const cityInput = document.querySelector('#city-search');
 const currentWeatherDiv = document.querySelector('#current-weather');
 const currentDate = dayjs().format('dddd, MMMM D, YYYY');
 let cityName;
+let currentTemp;
+let currentWind;
+let currentHumidity;
 
 
 const getWeather = async (url) => {
@@ -16,7 +19,6 @@ const getWeather = async (url) => {
     currentWind = cityData.wind.speed;
     currentHumidity = cityData.main.humidity;
     console.log(cityData)
-
 
     displayCurrentWeather()
 }
@@ -39,11 +41,20 @@ const displayCurrentWeather = () => {
     currentWeatherDiv.appendChild(currentWindDisplay);
 
     const currentHumidityDisplay = document.createElement('p');
-    currentHumidityDisplay.textContent = 'Humidity: ' + currentHumidity + ' %';
+    currentHumidityDisplay.textContent = 'Humidity: ' + currentHumidity + '%';
     currentWeatherDiv.appendChild(currentHumidityDisplay);
 }
 
+// const updateRecentSearch = () => {
+//     currentCity = 
+// }
 
 
+
+
+
+//need to clear from main when searching again
+//add icons to weather
+//5 day forecast
 
 searchBtn.addEventListener('click', getWeather)
