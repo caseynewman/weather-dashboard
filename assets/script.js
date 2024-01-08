@@ -75,15 +75,15 @@ const removeDuplicateCities = (data) => {
 
 
 const displayRecentSearch = () => {
+    const unique = removeDuplicateCities(cities);
     localStorage.setItem('cities', JSON.stringify(cities));
     const citiesList = document.createElement('li');
-    cities.forEach((cities, index) => {
+    unique.forEach((cities, index) => {
         const newCity = document.createElement('button');
         newCity.textContent = cities;
         citiesList.appendChild(newCity);
     })
     citiesContainer.appendChild(citiesList);
-    removeDuplicateCities(cities);
 
 }
 
@@ -110,5 +110,6 @@ console.log(removeDuplicateCities(cities))
 //need to clear from main when searching again
 //add icons to weather
 //5 day forecast
+//disable button if input is empty
 
 searchBtn.addEventListener('click', getWeather)
