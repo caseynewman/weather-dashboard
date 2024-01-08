@@ -30,6 +30,14 @@ h1 {
     font-weight: 300;
 }
 
+h2 {
+    font-family: 'Red Hat Display', Helvetica, Arial, sans-serif;
+    font-size: 1.7em;
+    margin-bottom: 15px;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+
 main {
     display: flex;
     justify-content: space-evenly;
@@ -52,7 +60,7 @@ main {
     justify-content: flex-start;
     background-color: white;
     max-width: 1000px;
-    max-height: 150px;
+    min-height: 150px;
     flex-grow: 1;
     flex-shrink: 1;
     padding: 15px;
