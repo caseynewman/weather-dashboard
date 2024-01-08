@@ -10,6 +10,7 @@ let currentWind;
 let currentHumidity;
 
 
+
 const getWeather = async (url) => {
     let currentCity = cityInput.value;
 
@@ -22,8 +23,9 @@ const getWeather = async (url) => {
     currentHumidity = cityData.main.humidity;
     console.log(cityData)
 
+
     displayCurrentWeather();
-    updateRecentSearch();
+    // updateRecentSearch();
 }
 
 const displayCurrentWeather = () => {
@@ -48,14 +50,12 @@ const displayCurrentWeather = () => {
     currentWeatherDiv.appendChild(currentHumidityDisplay);
 }
 
-const updateRecentSearch = () => {
-    cities.push(cityName);
-    localStorage.setItem('cities', JSON.stringify(cities));
-    displayRecentSearch();
-
-}
+// const updateRecentSearch = () => {
+//     localStorage.setItem('cities', JSON.stringify(cities));
+// }
 
 const displayRecentSearch = () => {
+    localStorage.setItem('cities', JSON.stringify(cities));
     const citiesList = document.createElement('li');
     cities.forEach((cities, index) => {
         const newCity = document.createElement('button');
@@ -63,8 +63,19 @@ const displayRecentSearch = () => {
         citiesList.appendChild(newCity);
     })
     citiesContainer.appendChild(citiesList);
+    console.log(removeDuplicateCities(cities));
+
 }
 
+const removeDuplicateCities = (data) => {
+    let uniqueCities = [];
+    data.forEach(element => {
+        if(!uniqueCities.includes(element)) {
+            uniqueCities.push(element)
+        }
+    });
+    return uniqueCities;
+}
 
 const displayRecentSearchHeading = () => {
     const recentSearchHeading = document.createElement('h4');
@@ -73,6 +84,7 @@ const displayRecentSearchHeading = () => {
 }
 
 displayRecentSearchHeading();
+displayRecentSearch();
 
 
 
