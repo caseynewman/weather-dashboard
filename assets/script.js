@@ -52,21 +52,23 @@ const updateRecentSearch = () => {
     cities.push(cityName);
     localStorage.setItem('cities', JSON.stringify(cities));
     displayRecentSearch();
+
 }
 
 const displayRecentSearch = () => {
-    const citiesList = document.createElement('ul');
+    const citiesList = document.createElement('li');
     cities.forEach((cities, index) => {
-        const newCity = document.createElement('li');
+        const newCity = document.createElement('button');
         newCity.textContent = cityName;
         citiesList.appendChild(newCity);
     })
     citiesContainer.appendChild(citiesList);
 }
 
+
 const displayRecentSearchHeading = () => {
     const recentSearchHeading = document.createElement('h4');
-    recentSearchHeading.textContent = 'Recent Searches';
+    recentSearchHeading.textContent = 'Your Recent Cities';
     citiesContainer.appendChild(recentSearchHeading);
 }
 
