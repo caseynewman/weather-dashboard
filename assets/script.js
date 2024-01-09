@@ -45,6 +45,7 @@ const getForecast = async (url) => {
     forecastArr = forecastData.list;
 
     for (let i = 0; i < forecastArr.length; i+=8) {     
+        forecastDate = forecastArr[i].dt;
         forecastTemp = forecastArr[i].main.temp;
         console.log(forecastTemp)
         // weatherIcon = forecastData.weather[i].icon;
