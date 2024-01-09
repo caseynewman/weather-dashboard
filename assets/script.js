@@ -37,6 +37,8 @@ const displayRecentSearchHeading = () => {
 displayRecentSearchHeading();
 
 const displayCurrentWeather = () => {
+    currentWeatherDiv.textContent = '';
+    
     const currentCityDisplay = document.createElement('h2');
     currentCityDisplay.textContent = cityName;
     currentWeatherDiv.appendChild(currentCityDisplay);
