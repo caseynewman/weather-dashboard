@@ -33,6 +33,7 @@ const getWeather = async (url) => {
     cityLon = cityData.coord.lon;
 
     displayCurrentWeather();
+    getForecast();
     // currentCity.textContent = '';
     updateRecentSearch();
 }
@@ -42,18 +43,14 @@ const getForecast = async (url) => {
     const forecastData = await response.json();
     cityName = forecastData.city.name;
     forecastArr = forecastData.list;
-    console.log(cityName)
-    console.log(forecastData)
-    console.log(forecastArr)
 
-    for (let i = 0; i < forecastArr[4]; i++) {
-
+    for (let i = 0; i < forecastArr.length; i+=8) {     
+        forecastTemp = forecastArr[i].main.temp;
+        console.log(forecastTemp)
+        // weatherIcon = forecastData.weather[i].icon;
+        forecastWind = forecastArr[i].wind.speed;
+        forecastHumidity = forecastArr[i].main.humidity;
     }
-
-    forecastTemp = forecastData.list[i].main.temp;
-    // weatherIcon = forecastData.weather[0].icon;
-    forecastWind = forecastData.list.wind.speed;
-    forecastHumidity = forecastData.list.main.humidity;
 
     displayForecast();
 }
