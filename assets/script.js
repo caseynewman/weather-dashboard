@@ -1,20 +1,15 @@
 const searchBtn = document.querySelector('#search-button');
 const cityInput = document.querySelector('#city-search');
-const currentWeatherDiv = document.querySelector('#current-weather');
-const weeklyForecastDiv = document.querySelector('#weekly-forecast');
+const currentWeatherEl = document.querySelector('#current-weather');
 const citiesContainer = document.querySelector('#cities-container');
 const currentDate = dayjs().format('dddd, MMMM D, YYYY');
 let cities = JSON.parse(localStorage.getItem('cities')) || [];
 let cityName;
-let currentTemp;
-let currentWind;
-let currentHumidity;
 let cityLat;
 let cityLon;
+let forecastArr;
 let forecastDate;
-let forecastTemp;
-let forecastWind;
-let forecastHumidity;
+
 
 
 
@@ -24,15 +19,10 @@ const getWeather = async (url) => {
 
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const cityData = await response.json();
-    cityName = cityData.name;
-    currentTemp = cityData.main.temp;
-    // weatherIcon = cityData.weather[0].icon;
-    currentWind = cityData.wind.speed;
-    currentHumidity = cityData.main.humidity;
     cityLat = cityData.coord.lat;
     cityLon = cityData.coord.lon;
 
-    displayCurrentWeather();
+    displayCurrentWeather(cityData);
     getForecast();
     // currentCity.textContent = '';
     updateRecentSearch();
@@ -44,17 +34,11 @@ const getForecast = async (url) => {
     cityName = forecastData.city.name;
     forecastArr = forecastData.list;
 
-    for (let i = 0; i < forecastArr.length; i+=8) {     
-        forecastDate = forecastArr[i].dt;
-        forecastTemp = forecastArr[i].main.temp;
-        console.log(forecastTemp)
-        // weatherIcon = forecastData.weather[i].icon;
-        forecastWind = forecastArr[i].wind.speed;
-        forecastHumidity = forecastArr[i].main.humidity;
+    for(let i = 0; i < forecastArr.length; i+=8) {
+        displayForecast(forecastArr[i]);
+        }
     }
 
-    displayForecast();
-}
 
 const displayRecentSearchHeading = () => {
     const recentSearchHeading = document.createElement('h4');
@@ -64,48 +48,49 @@ const displayRecentSearchHeading = () => {
 
 displayRecentSearchHeading();
 
-const displayCurrentWeather = () => {
-    currentWeatherDiv.textContent = '';
+const displayCurrentWeather = (cityData) => {
+    currentWeatherEl.textContent = '';
 
-    const currentCityDisplay = document.createElement('h2');
-    currentCityDisplay.textContent = cityName;
-    currentWeatherDiv.appendChild(currentCityDisplay);
+    const currentCity = document.createElement('h2');
+    const dateHeading = document.createElement('h3');
+    const currentTemp = document.createElement('p');
+    const currentWind = document.createElement('p');
+    const currentHumidity = document.createElement('p');
 
-    const currentDateDisplay = document.createElement('h3');
-    currentDateDisplay.textContent = currentDate;
-    currentWeatherDiv.appendChild(currentDateDisplay);
+    currentCity.textContent = cityData.name;
+    dateHeading.textContent = currentDate;
+    currentTemp.textContent = 'Temp: ' + cityData.main.temp + ' °F';
+    currentWind.textContent = 'Wind: ' + cityData.wind.speed + ' MPH';
+    currentHumidity.textContent = 'Humidity: ' + cityData.main.humidity + '%';
 
-    const currentTempDisplay = document.createElement('p');
-    currentTempDisplay.textContent = 'Temp: ' + currentTemp + ' °F';
-    currentWeatherDiv.appendChild(currentTempDisplay);
-
-    const currentWindDisplay = document.createElement('p');
-    currentWindDisplay.textContent = 'Wind: ' + currentWind + ' MPH';
-    currentWeatherDiv.appendChild(currentWindDisplay);
-
-    const currentHumidityDisplay = document.createElement('p');
-    currentHumidityDisplay.textContent = 'Humidity: ' + currentHumidity + '%';
-    currentWeatherDiv.appendChild(currentHumidityDisplay);
+    currentWeatherEl.appendChild(currentCity);
+    currentWeatherEl.appendChild(dateHeading);
+    currentWeatherEl.appendChild(currentTemp);
+    currentWeatherEl.appendChild(currentWind);
+    currentWeatherEl.appendChild(currentHumidity);
 }
 
-const displayForecast = () => {
-    weeklyForecastDiv.textContent = '';
+const displayForecast = (dailyForecast) => {
+console.log(dailyForecast)
+    const forecastDay = document.createElement('article');
+    const forecastDate = document.createElement('h3');
+    const forecastTemp = document.createElement('p');
+    const forecastWind = document.createElement('p');
+    const forecastHumidity = document.createElement('p');
+    const weatherIcon = document.createElement('p');
 
-    const forecastDateDisplay = document.createElement('h3');
-    forecastDateDisplay.textContent = forecastDate;
-    weeklyForecastDiv.appendChild(forecastDateDisplay);
+    forecastDate.textContent = dailyForecast.dt;
+    forecastTemp.textContent = 'Temp: ' + dailyForecast.main.temp + ' °F';
+    forecastWind.textContent = 'Wind: ' + dailyForecast.wind.speed + ' MPH';
+    forecastHumidity.textContent = 'Humidity: ' + dailyForecast.main.humidity + '%';
+    weatherIcon.textContent = dailyForecast.weather[0].icon;
 
-    const forecastTempDisplay = document.createElement('p');
-    forecastTempDisplay.textContent = 'Temp: ' + forecastTemp + ' °F';
-    weeklyForecastDiv.appendChild(forecastTempDisplay);
-
-    const forecastWindDisplay = document.createElement('p');
-    forecastWindDisplay.textContent = 'Wind: ' + forecastWind + ' MPH';
-    weeklyForecastDiv.appendChild(forecastWindDisplay);
-
-    const forecastHumidityDisplay = document.createElement('p');
-    forecastHumidityDisplay.textContent = 'Humidity: ' + forecastHumidity + '%';
-    weeklyForecastDiv.appendChild(forecastHumidityDisplay);
+    currentWeatherEl.appendChild(forecastDay);
+    forecastDay.appendChild(forecastDate);
+    forecastDay.appendChild(forecastTemp);
+    forecastDay.appendChild(forecastWind);
+    forecastDay.appendChild(forecastHumidity);
+    forecastDay.appendChild(weatherIcon);
 }
 
 const updateRecentSearch = () => {
@@ -153,5 +138,6 @@ displayRecentSearch();
 //5 day forecast
 //disable button if input is empty
 //clear value from search bar onclick
+//format dates on forecast
 
 searchBtn.addEventListener('click', getWeather)
