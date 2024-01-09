@@ -1,6 +1,7 @@
 const searchBtn = document.querySelector('#search-button');
 const cityInput = document.querySelector('#city-search');
 const currentWeatherDiv = document.querySelector('#current-weather');
+const weeklyForecastDiv = document.querySelector('#weekly-forecast');
 const citiesContainer = document.querySelector('#cities-container');
 const currentDate = dayjs().format('dddd, MMMM D, YYYY');
 let cities = JSON.parse(localStorage.getItem('cities')) || [];
@@ -8,6 +9,12 @@ let cityName;
 let currentTemp;
 let currentWind;
 let currentHumidity;
+let cityLat;
+let cityLon;
+let forecastDate;
+let forecastTemp;
+let forecastWind;
+let forecastHumidity;
 
 
 
@@ -22,10 +29,33 @@ const getWeather = async (url) => {
     // weatherIcon = cityData.weather[0].icon;
     currentWind = cityData.wind.speed;
     currentHumidity = cityData.main.humidity;
-    console.log(cityData)
+    cityLat = cityData.coord.lat;
+    cityLon = cityData.coord.lon;
 
     displayCurrentWeather();
+    // currentCity.textContent = '';
     updateRecentSearch();
+}
+
+const getForecast = async (url) => {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
+    const forecastData = await response.json();
+    cityName = forecastData.city.name;
+    forecastArr = forecastData.list;
+    console.log(cityName)
+    console.log(forecastData)
+    console.log(forecastArr)
+
+    for (let i = 0; i < forecastArr[4]; i++) {
+
+    }
+
+    forecastTemp = forecastData.list[i].main.temp;
+    // weatherIcon = forecastData.weather[0].icon;
+    forecastWind = forecastData.list.wind.speed;
+    forecastHumidity = forecastData.list.main.humidity;
+
+    displayForecast();
 }
 
 const displayRecentSearchHeading = () => {
@@ -38,7 +68,7 @@ displayRecentSearchHeading();
 
 const displayCurrentWeather = () => {
     currentWeatherDiv.textContent = '';
-    
+
     const currentCityDisplay = document.createElement('h2');
     currentCityDisplay.textContent = cityName;
     currentWeatherDiv.appendChild(currentCityDisplay);
@@ -60,6 +90,26 @@ const displayCurrentWeather = () => {
     currentWeatherDiv.appendChild(currentHumidityDisplay);
 }
 
+const displayForecast = () => {
+    weeklyForecastDiv.textContent = '';
+
+    const forecastDateDisplay = document.createElement('h3');
+    forecastDateDisplay.textContent = forecastDate;
+    weeklyForecastDiv.appendChild(forecastDateDisplay);
+
+    const forecastTempDisplay = document.createElement('p');
+    forecastTempDisplay.textContent = 'Temp: ' + forecastTemp + ' °F';
+    weeklyForecastDiv.appendChild(forecastTempDisplay);
+
+    const forecastWindDisplay = document.createElement('p');
+    forecastWindDisplay.textContent = 'Wind: ' + forecastWind + ' MPH';
+    weeklyForecastDiv.appendChild(forecastWindDisplay);
+
+    const forecastHumidityDisplay = document.createElement('p');
+    forecastHumidityDisplay.textContent = 'Humidity: ' + forecastHumidity + '%';
+    weeklyForecastDiv.appendChild(forecastHumidityDisplay);
+}
+
 const updateRecentSearch = () => {
     cities.push(cityName)
     localStorage.setItem('cities', JSON.stringify(cities));
@@ -74,7 +124,6 @@ const removeDuplicateCities = (data) => {
     });
     return uniqueCities;
 }
-
 
 const displayRecentSearch = () => {
     const unique = removeDuplicateCities(cities);
@@ -91,13 +140,9 @@ const displayRecentSearch = () => {
 
 displayRecentSearch();
 
-
-
-
-console.log(removeDuplicateCities(cities))
-
-
-
+// const clearInput = () => {
+//     document.getElementById('#city-search').value = '';
+// }
 
 
 
@@ -106,12 +151,9 @@ console.log(removeDuplicateCities(cities))
 
 
 
-
-
-
-//need to clear from main when searching again
 //add icons to weather
 //5 day forecast
 //disable button if input is empty
+//clear value from search bar onclick
 
 searchBtn.addEventListener('click', getWeather)
