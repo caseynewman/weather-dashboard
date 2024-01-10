@@ -12,9 +12,7 @@ let forecastArr;
 
 
 const getWeather = async (city) => {
-    let currentCity = cityInput.value;
-
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const cityData = await response.json();
     cityLat = cityData.coord.lat;
     cityLon = cityData.coord.lon;
@@ -114,14 +112,18 @@ const removeDuplicateCities = (data) => {
 
 const displayRecentSearch = () => {
     const unique = removeDuplicateCities(cities);
-    localStorage.setItem('cities', JSON.stringify(cities));
+    localStorage.getItem('cities', JSON.stringify(cities));
     citiesContainer.innerHTML = '';
     const citiesList = document.createElement('li');
     unique.forEach((cities, index) => {
         const newCity = document.createElement('button');
         newCity.textContent = cities;
         citiesList.appendChild(newCity);
-        newCity.addEventListener('click', getWeather)
+
+        newCity.addEventListener('click', (e) => {
+            let myRecentCity = e.target.textContent;
+            getWeather(myRecentCity);
+        })
     })
     citiesContainer.appendChild(citiesList);
 }
@@ -141,4 +143,9 @@ const clearInput = () => {
 //check event listener for sidebar buttons
 //recent cities heading
 
-searchBtn.addEventListener('click', getWeather)
+
+
+searchBtn.addEventListener('click', (e) => {
+    let searchedCity = cityInput.value;
+    getWeather(searchedCity);
+})
