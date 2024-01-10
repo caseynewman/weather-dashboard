@@ -8,8 +8,6 @@ let cityName;
 let cityLat;
 let cityLon;
 let forecastArr;
-let forecastDate;
-
 
 
 
@@ -22,10 +20,16 @@ const getWeather = async (url) => {
     cityLat = cityData.coord.lat;
     cityLon = cityData.coord.lon;
 
+    if (cityInput.value !== '') {
+        searchBtn.disabled = false;
+    } else {
+        searchBtn.disabled = true;
+    }
+
     displayCurrentWeather(cityData);
     getForecast();
-    // currentCity.textContent = '';
     updateRecentSearch();
+    clearInput();
 }
 
 const getForecast = async (url) => {
@@ -39,7 +43,6 @@ const getForecast = async (url) => {
         }
     }
 
-
 const displayRecentSearchHeading = () => {
     const recentSearchHeading = document.createElement('h4');
     recentSearchHeading.textContent = 'Your Recent Cities';
@@ -47,6 +50,30 @@ const displayRecentSearchHeading = () => {
 }
 
 displayRecentSearchHeading();
+
+const removeDuplicateCities = (data) => {
+    let uniqueCities = [];
+    data.forEach(element => {
+        if(!uniqueCities.includes(element)) {
+            uniqueCities.push(element)
+        }
+    });
+    return uniqueCities;
+}
+
+const displayRecentSearch = () => {
+    const unique = removeDuplicateCities(cities);
+    localStorage.setItem('cities', JSON.stringify(cities));
+    const citiesList = document.createElement('li');
+    unique.forEach((cities, index) => {
+        const newCity = document.createElement('button');
+        newCity.textContent = cities;
+        citiesList.appendChild(newCity);
+    })
+    citiesContainer.appendChild(citiesList);
+}
+
+displayRecentSearch();
 
 const displayCurrentWeather = (cityData) => {
     currentWeatherEl.textContent = '';
@@ -71,7 +98,6 @@ const displayCurrentWeather = (cityData) => {
 }
 
 const displayForecast = (dailyForecast) => {
-console.log(dailyForecast)
     const forecastDay = document.createElement('article');
     const forecastDate = document.createElement('h3');
     const forecastTemp = document.createElement('p');
@@ -98,34 +124,9 @@ const updateRecentSearch = () => {
     localStorage.setItem('cities', JSON.stringify(cities));
 }
 
-const removeDuplicateCities = (data) => {
-    let uniqueCities = [];
-    data.forEach(element => {
-        if(!uniqueCities.includes(element)) {
-            uniqueCities.push(element)
-        }
-    });
-    return uniqueCities;
+const clearInput = () => {
+    cityInput.value = '';
 }
-
-const displayRecentSearch = () => {
-    const unique = removeDuplicateCities(cities);
-    localStorage.setItem('cities', JSON.stringify(cities));
-    const citiesList = document.createElement('li');
-    unique.forEach((cities, index) => {
-        const newCity = document.createElement('button');
-        newCity.textContent = cities;
-        citiesList.appendChild(newCity);
-    })
-    citiesContainer.appendChild(citiesList);
-
-}
-
-displayRecentSearch();
-
-// const clearInput = () => {
-//     document.getElementById('#city-search').value = '';
-// }
 
 
 
@@ -135,7 +136,6 @@ displayRecentSearch();
 
 
 //add icons to weather
-//5 day forecast
 //disable button if input is empty
 //clear value from search bar onclick
 //format dates on forecast
