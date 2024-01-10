@@ -11,7 +11,6 @@ let forecastArr;
 
 
 
-
 const getWeather = async (url) => {
     let currentCity = cityInput.value;
 
@@ -37,14 +36,12 @@ const getForecast = async (url) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const forecastData = await response.json();
     cityName = forecastData.city.name;
-    console.log(forecastData)
     forecastArr = forecastData.list;
 
     for(let i = 0; i < forecastArr.length; i+=8) {
         displayForecast(forecastArr[i]);
     }
 }
-
 
 const displayRecentSearchHeading = () => {
     const recentSearchHeading = document.createElement('h4');
@@ -77,7 +74,7 @@ const displayCurrentWeather = (cityData) => {
 }
 
 const displayForecast = (dailyForecast) => {
-console.log(dailyForecast)
+    console.log(forecastArr)
     const forecastDay = document.createElement('article');
     const forecastDate = document.createElement('h3');
     const forecastTemp = document.createElement('p');
@@ -85,7 +82,7 @@ console.log(dailyForecast)
     const forecastHumidity = document.createElement('p');
     const weatherIcon = document.createElement('p');
 
-    forecastDate.textContent = dailyForecast.dt;
+    forecastDate.textContent = dayjs(dailyForecast.dt_txt).format('MM/DD/YY');
     forecastTemp.textContent = 'Temp: ' + dailyForecast.main.temp + ' °F';
     forecastWind.textContent = 'Wind: ' + dailyForecast.wind.speed + ' MPH';
     forecastHumidity.textContent = 'Humidity: ' + dailyForecast.main.humidity + '%';
@@ -123,12 +120,12 @@ const displayRecentSearch = () => {
         const newCity = document.createElement('button');
         newCity.textContent = cities;
         citiesList.appendChild(newCity);
+        newCity.addEventListener('click', getWeather)
     })
     citiesContainer.appendChild(citiesList);
 }
 
 displayRecentSearch();
-
 
 const clearInput = () => {
     cityInput.value = '';
@@ -139,11 +136,8 @@ const clearInput = () => {
 
 
 
-
-
 //add icons to weather
-//disable button if input is empty
-//clear value from search bar onclick
 //format dates on forecast
+//check event listener for sidebar buttons
 
 searchBtn.addEventListener('click', getWeather)
