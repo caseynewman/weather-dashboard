@@ -47,7 +47,8 @@ main {
 
 #weather-container article:first-child {
     flex-basis: 100%;
-    background-color: rgb(245, 218, 182);
+    /* background-color: rgb(245, 218, 182); */
+    background-color: #aeb9d0;
 }
 
 #weather-container article {
