@@ -14,8 +14,6 @@ const getWeather = async (city) => {
     const cityData = await response.json();
     cityLat = cityData.coord.lat;
     cityLon = cityData.coord.lon;
-    // codeUnit = cityData.weather[0].icon;
-
 
     if (cityInput.value !== '') {
         searchBtn.disabled = false;
@@ -84,7 +82,7 @@ const displayForecast = (dailyForecast) => {
     const forecastWind = document.createElement('p');
     const forecastHumidity = document.createElement('p');
 
-    forecastDate.textContent = dayjs(dailyForecast.dt_txt).format('MM/DD/YY');
+    forecastDate.textContent = dayjs(dailyForecast.dt_txt).format('ddd, MMM D');
     weatherIcon.src = 'https://openweathermap.org/img/w/' + dailyForecast.weather[0].icon + '.png';
     forecastTemp.textContent = 'Temp: ' + dailyForecast.main.temp + ' °F';
     forecastWind.textContent = 'Wind: ' + dailyForecast.wind.speed + ' MPH';
@@ -145,6 +143,5 @@ searchBtn.addEventListener('click', (e) => {
 
 
 
-//add icons to weather
 //recent cities heading
 //add alert for invalid input
