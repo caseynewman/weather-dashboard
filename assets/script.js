@@ -1,6 +1,6 @@
 const searchBtn = document.querySelector('#search-button');
 const cityInput = document.querySelector('#city-search');
-const currentWeatherEl = document.querySelector('#current-weather');
+const weatherContainer = document.querySelector('#weather-container');
 const citiesContainer = document.querySelector('#cities-container');
 const currentDate = dayjs().format('dddd, MMMM D, YYYY');
 let cities = JSON.parse(localStorage.getItem('cities')) || [];
@@ -52,8 +52,9 @@ const getForecast = async (url) => {
 // displayRecentSearchHeading();
 
 const displayCurrentWeather = (cityData) => {
-    currentWeatherEl.textContent = '';
+    weatherContainer.textContent = '';
 
+    const currentWeatherEl = document.createElement('article');
     const currentCity = document.createElement('h2');
     const dateHeading = document.createElement('h3');
     const currentTemp = document.createElement('p');
@@ -66,6 +67,7 @@ const displayCurrentWeather = (cityData) => {
     currentWind.textContent = 'Wind: ' + cityData.wind.speed + ' MPH';
     currentHumidity.textContent = 'Humidity: ' + cityData.main.humidity + '%';
 
+    weatherContainer.appendChild(currentWeatherEl);
     currentWeatherEl.appendChild(currentCity);
     currentWeatherEl.appendChild(dateHeading);
     currentWeatherEl.appendChild(currentTemp);
@@ -85,9 +87,9 @@ const displayForecast = (dailyForecast) => {
     forecastTemp.textContent = 'Temp: ' + dailyForecast.main.temp + ' °F';
     forecastWind.textContent = 'Wind: ' + dailyForecast.wind.speed + ' MPH';
     forecastHumidity.textContent = 'Humidity: ' + dailyForecast.main.humidity + '%';
-    weatherIcon.textContent = dailyForecast.weather[0].icon;
+    weatherIcon.textContent = String.fromCharCode(dailyForecast.weather[0].icon);
 
-    currentWeatherEl.appendChild(forecastDay);
+    weatherContainer.appendChild(forecastDay);
     forecastDay.appendChild(forecastDate);
     forecastDay.appendChild(forecastTemp);
     forecastDay.appendChild(forecastWind);

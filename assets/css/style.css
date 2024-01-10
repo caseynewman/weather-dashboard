@@ -41,14 +41,19 @@ main {
     border: 1px solid #000;
 }
 
-#current-weather {
+#weather-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-#current-weather article {
+#weather-container article:first-child {
+    flex-basis: 100%;
+    background-color: burlywood;
+}
+
+#weather-container article {
     display: flex;
     flex: 1 1 150px;
     flex-direction: column;
@@ -56,11 +61,6 @@ main {
     background-color: #d0daee;
     border: 1px solid #333333;
     padding: 10px;
-}
-
-#current-weather article:first-child {
-    flex-basis: 100%;
-    background-color: burlywood;
 }
 
 #side-bar {
