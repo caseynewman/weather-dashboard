@@ -58,7 +58,7 @@ main {
 
 #current-weather article:first-child {
     flex-basis: 100%;
-    flex-direction: column;
+    background-color: burlywood;
 }
 
 #side-bar {

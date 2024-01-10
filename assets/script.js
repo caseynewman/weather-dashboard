@@ -27,8 +27,9 @@ const getWeather = async (url) => {
     }
 
     displayCurrentWeather(cityData);
-    getForecast();
+    await getForecast();
     updateRecentSearch();
+    displayRecentSearch();
     clearInput();
 }
 
@@ -36,12 +37,14 @@ const getForecast = async (url) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const forecastData = await response.json();
     cityName = forecastData.city.name;
+    console.log(forecastData)
     forecastArr = forecastData.list;
 
     for(let i = 0; i < forecastArr.length; i+=8) {
         displayForecast(forecastArr[i]);
-        }
     }
+}
+
 
 const displayRecentSearchHeading = () => {
     const recentSearchHeading = document.createElement('h4');
@@ -50,30 +53,6 @@ const displayRecentSearchHeading = () => {
 }
 
 displayRecentSearchHeading();
-
-const removeDuplicateCities = (data) => {
-    let uniqueCities = [];
-    data.forEach(element => {
-        if(!uniqueCities.includes(element)) {
-            uniqueCities.push(element)
-        }
-    });
-    return uniqueCities;
-}
-
-const displayRecentSearch = () => {
-    const unique = removeDuplicateCities(cities);
-    localStorage.setItem('cities', JSON.stringify(cities));
-    const citiesList = document.createElement('li');
-    unique.forEach((cities, index) => {
-        const newCity = document.createElement('button');
-        newCity.textContent = cities;
-        citiesList.appendChild(newCity);
-    })
-    citiesContainer.appendChild(citiesList);
-}
-
-displayRecentSearch();
 
 const displayCurrentWeather = (cityData) => {
     currentWeatherEl.textContent = '';
@@ -98,6 +77,7 @@ const displayCurrentWeather = (cityData) => {
 }
 
 const displayForecast = (dailyForecast) => {
+console.log(dailyForecast)
     const forecastDay = document.createElement('article');
     const forecastDate = document.createElement('h3');
     const forecastTemp = document.createElement('p');
@@ -123,6 +103,32 @@ const updateRecentSearch = () => {
     cities.push(cityName)
     localStorage.setItem('cities', JSON.stringify(cities));
 }
+
+const removeDuplicateCities = (data) => {
+    let uniqueCities = [];
+    data.forEach(element => {
+        if(!uniqueCities.includes(element)) {
+            uniqueCities.push(element)
+        }
+    });
+    return uniqueCities;
+}
+
+const displayRecentSearch = () => {
+    const unique = removeDuplicateCities(cities);
+    localStorage.setItem('cities', JSON.stringify(cities));
+    citiesContainer.innerHTML = '';
+    const citiesList = document.createElement('li');
+    unique.forEach((cities, index) => {
+        const newCity = document.createElement('button');
+        newCity.textContent = cities;
+        citiesList.appendChild(newCity);
+    })
+    citiesContainer.appendChild(citiesList);
+}
+
+displayRecentSearch();
+
 
 const clearInput = () => {
     cityInput.value = '';
