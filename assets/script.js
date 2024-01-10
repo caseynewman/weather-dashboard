@@ -74,7 +74,6 @@ const displayCurrentWeather = (cityData) => {
 }
 
 const displayForecast = (dailyForecast) => {
-    console.log(forecastArr)
     const forecastDay = document.createElement('article');
     const forecastDate = document.createElement('h3');
     const forecastTemp = document.createElement('p');
@@ -137,7 +136,6 @@ const clearInput = () => {
 
 
 //add icons to weather
-//format dates on forecast
 //check event listener for sidebar buttons
 
 searchBtn.addEventListener('click', getWeather)
