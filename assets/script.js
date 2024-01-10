@@ -43,13 +43,13 @@ const getForecast = async (url) => {
     }
 }
 
-const displayRecentSearchHeading = () => {
-    const recentSearchHeading = document.createElement('h4');
-    recentSearchHeading.textContent = 'Your Recent Cities';
-    citiesContainer.appendChild(recentSearchHeading);
-}
+// const displayRecentSearchHeading = () => {
+//     const recentSearchHeading = document.createElement('h4');
+//     recentSearchHeading.textContent = 'Your Recent Cities';
+//     citiesContainer.appendChild(recentSearchHeading);
+// }
 
-displayRecentSearchHeading();
+// displayRecentSearchHeading();
 
 const displayCurrentWeather = (cityData) => {
     currentWeatherEl.textContent = '';
@@ -137,5 +137,6 @@ const clearInput = () => {
 
 //add icons to weather
 //check event listener for sidebar buttons
+//recent cities heading
 
 searchBtn.addEventListener('click', getWeather)

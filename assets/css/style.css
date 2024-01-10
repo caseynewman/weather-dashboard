@@ -53,7 +53,8 @@ main {
     flex: 1 1 150px;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: cadetblue;
+    background-color: #d0daee;
+    border: 1px solid #333333;
     padding: 10px;
 }
 
@@ -134,6 +135,7 @@ h4 {
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .bold {
