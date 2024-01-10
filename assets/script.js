@@ -9,13 +9,13 @@ let cityLat;
 let cityLon;
 let forecastArr;
 
-
-
 const getWeather = async (city) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const cityData = await response.json();
     cityLat = cityData.coord.lat;
     cityLon = cityData.coord.lon;
+    // codeUnit = cityData.weather[0].icon;
+
 
     if (cityInput.value !== '') {
         searchBtn.disabled = false;
@@ -55,12 +55,14 @@ const displayCurrentWeather = (cityData) => {
     const currentWeatherEl = document.createElement('article');
     const currentCity = document.createElement('h2');
     const dateHeading = document.createElement('h3');
+    const currentIcon = document.createElement('img');
     const currentTemp = document.createElement('p');
     const currentWind = document.createElement('p');
     const currentHumidity = document.createElement('p');
 
     currentCity.textContent = cityData.name;
     dateHeading.textContent = currentDate;
+    currentIcon.src = 'https://openweathermap.org/img/w/' + cityData.weather[0].icon + '.png';
     currentTemp.textContent = 'Temp: ' + cityData.main.temp + ' °F';
     currentWind.textContent = 'Wind: ' + cityData.wind.speed + ' MPH';
     currentHumidity.textContent = 'Humidity: ' + cityData.main.humidity + '%';
@@ -68,6 +70,7 @@ const displayCurrentWeather = (cityData) => {
     weatherContainer.appendChild(currentWeatherEl);
     currentWeatherEl.appendChild(currentCity);
     currentWeatherEl.appendChild(dateHeading);
+    currentWeatherEl.appendChild(currentIcon);
     currentWeatherEl.appendChild(currentTemp);
     currentWeatherEl.appendChild(currentWind);
     currentWeatherEl.appendChild(currentHumidity);
@@ -76,23 +79,23 @@ const displayCurrentWeather = (cityData) => {
 const displayForecast = (dailyForecast) => {
     const forecastDay = document.createElement('article');
     const forecastDate = document.createElement('h3');
+    const weatherIcon = document.createElement('img');
     const forecastTemp = document.createElement('p');
     const forecastWind = document.createElement('p');
     const forecastHumidity = document.createElement('p');
-    const weatherIcon = document.createElement('p');
 
     forecastDate.textContent = dayjs(dailyForecast.dt_txt).format('MM/DD/YY');
+    weatherIcon.src = 'https://openweathermap.org/img/w/' + dailyForecast.weather[0].icon + '.png';
     forecastTemp.textContent = 'Temp: ' + dailyForecast.main.temp + ' °F';
     forecastWind.textContent = 'Wind: ' + dailyForecast.wind.speed + ' MPH';
     forecastHumidity.textContent = 'Humidity: ' + dailyForecast.main.humidity + '%';
-    weatherIcon.textContent = String.fromCharCode(dailyForecast.weather[0].icon);
 
     weatherContainer.appendChild(forecastDay);
     forecastDay.appendChild(forecastDate);
+    forecastDay.appendChild(weatherIcon);
     forecastDay.appendChild(forecastTemp);
     forecastDay.appendChild(forecastWind);
     forecastDay.appendChild(forecastHumidity);
-    forecastDay.appendChild(weatherIcon);
 }
 
 const updateRecentSearch = () => {
@@ -134,18 +137,14 @@ const clearInput = () => {
     cityInput.value = '';
 }
 
-
+searchBtn.addEventListener('click', (e) => {
+    let searchedCity = cityInput.value;
+    getWeather(searchedCity);
+})
 
 
 
 
 //add icons to weather
-//check event listener for sidebar buttons
 //recent cities heading
-
-
-
-searchBtn.addEventListener('click', (e) => {
-    let searchedCity = cityInput.value;
-    getWeather(searchedCity);
-})
+//add alert for invalid input
