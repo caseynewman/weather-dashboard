@@ -15,12 +15,5 @@ To use the Weather Dashboard, type a city into the search bar and click Search t
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
-## Features
-
-If your project has a lot of features, list them here.
+- [Getting weather for once a day instead of every 3 hours](https://stackoverflow.com/questions/59935038/openweathermap-api-forecast-for-only-days)
+- [Converting weather icon to image](https://stackoverflow.com/questions/53504804/how-to-convert-openweathermap-icon-code-to-actual-image)
