@@ -34,7 +34,7 @@ main {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    flex: 1 1 500px;
+    flex: 1 1 300px;
     /* flex-grow: 1;
     flex-shrink: 1; */
     padding: 15px;
@@ -112,6 +112,11 @@ button {
     letter-spacing: 1px;
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+button:hover,
+#search-button:hover {
+    background-color: #cfa79b;
 }
 
 li {
