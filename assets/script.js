@@ -12,15 +12,15 @@ let forecastArr;
 const getWeather = async (city) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const cityData = await response.json();
-
-    cityLat = cityData.coord.lat;
-    cityLon = cityData.coord.lon;
-
+     
     if (cityInput.value !== '') {
         searchBtn.disabled = false;
     } else {
         searchBtn.disabled = true;
     }
+
+    cityLat = cityData.coord.lat;
+    cityLon = cityData.coord.lon;
 
     displayCurrentWeather(cityData);
     await getForecast();
@@ -40,13 +40,13 @@ const getForecast = async (url) => {
     }
 }
 
-// const displayRecentSearchHeading = () => {
-//     const recentSearchHeading = document.createElement('h4');
-//     recentSearchHeading.textContent = 'Your Recent Cities';
-//     citiesContainer.appendChild(recentSearchHeading);
-// }
+const displayRecentSearchHeading = () => {
+    const recentSearchHeading = document.createElement('h4');
+    recentSearchHeading.textContent = 'Your Recent Cities';
+    citiesContainer.appendChild(recentSearchHeading);
+}
 
-// displayRecentSearchHeading();
+displayRecentSearchHeading();
 
 const displayCurrentWeather = (cityData) => {
     weatherContainer.textContent = '';
@@ -116,6 +116,7 @@ const displayRecentSearch = () => {
     const unique = removeDuplicateCities(cities);
     localStorage.getItem('cities', JSON.stringify(cities));
     citiesContainer.innerHTML = '';
+    displayRecentSearchHeading();
     const citiesList = document.createElement('li');
     unique.forEach((cities, index) => {
         const newCity = document.createElement('button');
@@ -142,9 +143,4 @@ searchBtn.addEventListener('click', (e) => {
 })
 
 
-
-
-//recent cities heading
-//add alert for invalid input
 //finish readme - credits, screenshot
-//css - container width, maybe bg?
