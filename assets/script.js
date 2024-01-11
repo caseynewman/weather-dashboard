@@ -141,6 +141,3 @@ searchBtn.addEventListener('click', (e) => {
     let searchedCity = cityInput.value;
     getWeather(searchedCity);
 })
-
-
-//finish readme - credits, screenshot

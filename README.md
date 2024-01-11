@@ -17,3 +17,4 @@ To use the Weather Dashboard, type a city into the search bar and click Search t
 
 - [Getting weather for once a day instead of every 3 hours](https://stackoverflow.com/questions/59935038/openweathermap-api-forecast-for-only-days)
 - [Converting weather icon to image](https://stackoverflow.com/questions/53504804/how-to-convert-openweathermap-icon-code-to-actual-image)
+- My tutor, John Titus, helped me work through some local storage questions from another project that I was able to apply to the Weather Dashboard as well
