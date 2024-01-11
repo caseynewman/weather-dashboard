@@ -82,7 +82,7 @@ const displayForecast = (dailyForecast) => {
     const forecastWind = document.createElement('p');
     const forecastHumidity = document.createElement('p');
 
-    forecastDate.textContent = dayjs(dailyForecast.dt_txt).format('ddd, MMM D');
+    forecastDate.textContent = dayjs(dailyForecast.dt_txt).format('dddd, MMM D');
     weatherIcon.src = 'https://openweathermap.org/img/w/' + dailyForecast.weather[0].icon + '.png';
     forecastTemp.textContent = 'Temp: ' + dailyForecast.main.temp + ' °F';
     forecastWind.textContent = 'Wind: ' + dailyForecast.wind.speed + ' MPH';
@@ -138,6 +138,14 @@ const clearInput = () => {
 searchBtn.addEventListener('click', (e) => {
     let searchedCity = cityInput.value;
     getWeather(searchedCity);
+
+
+    // if (cityInput.value === false) {
+    //     console.log('weird')
+    // } else {
+    //     console.log('this is normal')
+    // }
+
 })
 
 
@@ -145,3 +153,5 @@ searchBtn.addEventListener('click', (e) => {
 
 //recent cities heading
 //add alert for invalid input
+//finish readme - credits, screenshot
+//css - container width, maybe bg?
