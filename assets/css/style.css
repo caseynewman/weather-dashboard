@@ -5,7 +5,7 @@
 
 body {
     background-color: #f8f9fb;
-    color: #333333;
+    color: #333;
     font-size: 16px;
     padding: 30px;
 }
@@ -40,14 +40,20 @@ main {
     padding: 15px;
     min-height: 500px;
     background-color: white;
-    border: 1px solid #000;
+    border: 1px solid #333;
+    border-radius: 7px;
     gap: 10px;
 }
 
 #weather-container article:first-child {
     flex-basis: 100%;
-    /* background-color: rgb(245, 218, 182); */
-    background-color: #aeb9d0;
+    background-image: url("/Users/caseynewman1/bootcamp/weather-dashboard/assets/images/weather-background.jpg");
+    /* Photo by <a href="https://unsplash.com/@wildhoney?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">John Fowler</a> on <a href="https://unsplash.com/photos/white-sand-RsRTIofe0HE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+   */
+    background-size: cover;
+    background-position: center;
+    color: #333333;
+    /* background-color: #aeb9d0; */
 }
 
 #weather-container article {
@@ -55,9 +61,11 @@ main {
     flex: 1 1 150px;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: #d0daee;
-    border: 1px solid #333333;
-    padding: 10px;
+    background-color: #9CA8AD;
+    border: 1px solid #333;
+    border-radius: 7px;
+    color: #ffffff;
+    padding: 15px;
 }
 
 #weather-container img {
@@ -72,22 +80,24 @@ main {
     min-height: 500px;
     max-width: 300px;
     padding: 15px;
-    border: 1px solid #000;
+    border: 1px solid #333;
+    border-radius: 7px;
 }
 
 #city-search {
     padding: 5px 10px;
-    border: 1px solid #333333;
+    border: 1px solid #333;
+    border-radius: 7px;
     letter-spacing: 1px;
     margin-bottom: 10px;
 }
 
 #search-button {
     padding: 5px 10px;
-    border-radius: 0px;
+    border-radius: 7px;
     color: #333333;
-    background-color: blanchedalmond;
-    border: 1px solid #000000;
+    background-color: #DFBBB0;
+    border: 1px solid #333;
     letter-spacing: 1px;
     cursor: pointer;
     margin-bottom: 15px;
@@ -95,10 +105,10 @@ main {
 
 button {
     padding: 3px 7px;
-    border-radius: 0px;
+    border-radius: 7px;
     color: #333333;
-    background-color: rgb(255, 250, 241);
-    border: 1px solid #000000;
+    background-color: #eecfc5;
+    border: 1px solid #333;
     letter-spacing: 1px;
     cursor: pointer;
     margin-bottom: 10px;

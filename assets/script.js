@@ -12,6 +12,7 @@ let forecastArr;
 const getWeather = async (city) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe48577d7995f2974587723e4b533c3c&units=imperial`);
     const cityData = await response.json();
+
     cityLat = cityData.coord.lat;
     cityLon = cityData.coord.lon;
 
@@ -58,7 +59,7 @@ const displayCurrentWeather = (cityData) => {
     const currentWind = document.createElement('p');
     const currentHumidity = document.createElement('p');
 
-    currentCity.textContent = cityData.name;
+    currentCity.textContent = cityData.name.trim();
     dateHeading.textContent = currentDate;
     currentIcon.src = 'https://openweathermap.org/img/w/' + cityData.weather[0].icon + '.png';
     currentTemp.textContent = 'Temp: ' + cityData.main.temp + ' °F';
@@ -138,14 +139,6 @@ const clearInput = () => {
 searchBtn.addEventListener('click', (e) => {
     let searchedCity = cityInput.value;
     getWeather(searchedCity);
-
-
-    // if (cityInput.value === false) {
-    //     console.log('weird')
-    // } else {
-    //     console.log('this is normal')
-    // }
-
 })
 
 
