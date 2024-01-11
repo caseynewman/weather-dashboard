@@ -2,25 +2,16 @@
 
 ## Description
 
-The Weather Dashboard was created so that the user can search a specific city to get the current and future weather. You'll be given the date, the temperature, humidity, and wind speed currently and for the next five days. The search history will be saved in the sidebar so that they're easily accessible.
+The Weather Dashboard was created so that the user can search a specific city to get the current and future weather. You'll be given the date, the temperature, humidity, and wind speed currently and for the next five days. The search history will be saved in the sidebar so that previously searched cities are easily accessible.
 
-In building this project, I learned how to 
+In building this project, I used the OpenWeather API to get weather information for each city. I also used Day.js to get the current date and format the 5-day forecast. I used local storage to store recently searched cities.
 
-
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+![Weather Dashboard]()
+[Deployed Website](https://caseynewman.github.io/weather-dashboard/)
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
-
-![alt text](assets/images/screenshot.png)
+To use the Weather Dashboard, type a city into the search bar and click Search to retrieve weather information for that specific location. For quick access to your recent searches, click a city from the sidebard to retrieve its weather info.
 
 ## Credits
 
