@@ -6,7 +6,7 @@ The Weather Dashboard was created so that the user can search a specific city to
 
 In building this project, I used the OpenWeather API to get weather information for each city. I also used Day.js to get the current date and format the 5-day forecast. I used local storage to store recently searched cities.
 
-![Weather Dashboard]()
+![Weather Dashboard](/assets/images/weather-dashboard-screenshot.png)
 [Deployed Website](https://caseynewman.github.io/weather-dashboard/)
 
 ## Usage
