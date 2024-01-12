@@ -43,7 +43,7 @@ main {
 
 #weather-container article:first-child {
     flex-basis: 100%;
-    background-image: url("/users/caseynewman1/bootcamp/weather-dashboard/assets/images/weather-background.jpg");
+    background-image: url("../images/weather-background.jpg");
     /* Photo by <a href="https://unsplash.com/@wildhoney?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">John Fowler</a> on <a href="https://unsplash.com/photos/white-sand-RsRTIofe0HE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
    */
     background-size: cover;
